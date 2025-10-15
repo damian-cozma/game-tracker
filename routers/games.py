@@ -27,9 +27,17 @@ class GameRequest(BaseModel):
     description: str = Field(max_length=200)
     rating: int = Field(gt=0, lt=6)
 
-@router.get('/list', status_code=status.HTTP_200_OK)
-def read_all(db: db_dependency):
+@router.get('/', status_code=status.HTTP_200_OK)
+def get_all(db: db_dependency):
     return db.query(Games).all()
+
+@router.get('/{game_id}', status_code=status.HTTP_200_OK)
+def get_game(db: db_dependency, game_id: int = Path(gt=0)):
+    game_model = db.query(Games).filter(Games.id == game_id).first()
+    if game_model is None:
+        raise HTTPException(status_code=404, detail='Game not found')
+
+    return game_model
 
 @router.post('/add', status_code=status.HTTP_201_CREATED)
 def add_game(db: db_dependency, game_request: GameRequest):
