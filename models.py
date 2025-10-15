@@ -6,4 +6,6 @@ class Games(Base):
     __tablename__ = 'games'
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
+    title = Column(String)
+    description = Column(String)
+    rating = Column(Integer)
