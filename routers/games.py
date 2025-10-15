@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Path
+from fastapi import APIRouter, Path, HTTPException
 from fastapi.params import Depends
 from sqlalchemy.orm import Session
 from typing import Annotated
@@ -40,10 +40,21 @@ def add_game(db: db_dependency, game_request: GameRequest):
 @router.put('/edit/{game_id}', status_code=status.HTTP_204_NO_CONTENT)
 def edit_game(db: db_dependency, game_request: GameRequest, game_id: int = Path(gt=0)):
     game_model = db.query(Games).filter(Games.id == game_id).first()
+    if game_model is None:
+        raise HTTPException(status_code=404, detail='Game not found')
 
     game_model.title = game_request.title
     game_model.description = game_request.description
     game_model.rating = game_request.rating
 
     db.add(game_model)
+    db.commit()
+
+@router.delete('/delete/{game_id}', status_code=status.HTTP_204_NO_CONTENT)
+def delete_game(db: db_dependency, game_id: int = Path(gt=0)):
+    game_model = db.query(Games).filter(Games.id == game_id).first()
+    if game_model is None:
+        raise HTTPException(status_code=404, detail='Game not found')
+
+    db.delete(game_model)
     db.commit()
