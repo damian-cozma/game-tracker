@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import games
+from routers import games, auth
 
 app = FastAPI()
 
@@ -8,3 +8,4 @@ def homepage():
     return 'Hello!'
 
 app.include_router(games.router)
+app.include_router(auth.router)
