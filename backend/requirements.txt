@@ -1,5 +1,17 @@
-fastapi
-uvicorn
-sqlalchemy
-passlib[bcrypt]
+# Core
+fastapi==0.118.3
+uvicorn==0.37.0
+
+# Database
+SQLAlchemy==2.0.44
+alembic==1.16.5
+psycopg2-binary==2.9.11
+
+# Auth / Security
+passlib[bcrypt]==1.7.4
 bcrypt==4.3.0
+python-jose==3.5.0
+
+# Env / Forms
+python-dotenv==1.1.1
+python-multipart==0.0.20
