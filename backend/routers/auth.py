@@ -8,8 +8,8 @@ from pydantic import BaseModel
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from starlette import status
-from database import SessionLocal
-from models import Users
+from backend.database import SessionLocal
+from backend.models import Users
 from dotenv import load_dotenv
 from jose import jwt, JWTError
 import os

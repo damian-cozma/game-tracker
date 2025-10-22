@@ -6,9 +6,9 @@ from pydantic import BaseModel, Field
 
 from starlette import status
 
-from database import SessionLocal
-from models import Games
-from routers.auth import get_current_user
+from backend.database import SessionLocal
+from backend.models import Games
+from backend.routers.auth import get_current_user
 
 router = APIRouter(
     prefix='/games',

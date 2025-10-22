@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 
-from database import Base
+from backend.database import Base
 
 class Games(Base):
     __tablename__ = 'games'
